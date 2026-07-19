@@ -17,18 +17,34 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+Collaborative filtering and content based filtering are two types of approaches that recommendation systems use to help predict which items a user will like based on patters in data. This system used a simple content-based approach:
 
-Some prompts to answer:
+  - It looks at the features of each song
+  - Compares features to the user's preferences
+  - Gives each song a scored based on how well it matches
+  - Ranks songs and recommends the best ones
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+Features of the Song objects:
 
-You can include a simple diagram or bullet list if helpful.
+  - id
+  - title
+  - artist
+  - genre
+  - mood
+  - energy
+  - tempo_bpm
+  - valence
+  - danceability
+  - acousticness
 
+Features of the UserProfile objects:
+
+  - favorite_genre
+  - favorite_mood
+  - target_energy
+  - likes_acoustic
+
+Songs are chosen by comparing each song's features to the user's preferences, giving each song a score, and then ranking the songs from highest score to lowest. The songs with the best match are recommended first.
 ---
 
 ## Getting Started
