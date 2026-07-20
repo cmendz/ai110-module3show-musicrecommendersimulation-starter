@@ -18,20 +18,24 @@ except ImportError:
 def main() -> None:
     songs = load_songs("data/songs.csv")
 
-    user_prefs = {
+    profile_one = {
         "favorite_genre": "pop",
         "favorite_mood": "happy",
         "target_energy": 0.8,
         "likes_acoustic": False,
     }
-
-    print("\nUser Profile")
-    print("-----------")
-    print(f"Favorite genre: {user_prefs['favorite_genre']}")
-    print(f"Favorite mood: {user_prefs['favorite_mood']}")
-    print(f"Target energy: {user_prefs['target_energy']:.2f}")
-    print(f"Likes acoustic: {user_prefs['likes_acoustic']}")
-    print()
+    profile_two = {
+        "favorite_genre": "lofi",
+        "favorite_mood": "chill",
+        "target_energy": 0.35,
+        "likes_acoustic": True,
+    }
+    profile_three = {
+        "favorite_genre": "rock",
+        "favorite_mood": "intense",
+        "target_energy": 0.9,
+        "likes_acoustic": False,
+    }
 
     print("Loaded songs from CSV:\n")
     for song in songs:
@@ -40,14 +44,27 @@ def main() -> None:
             f"| genre={song['genre']} | mood={song['mood']} | energy={song['energy']:.2f}"
         )
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+    def show_profile_results(user_prefs: dict) -> None:
+        print("\nUser Profile")
+        print("-----------")
+        print(f"Favorite genre: {user_prefs['favorite_genre']}")
+        print(f"Favorite mood: {user_prefs['favorite_mood']}")
+        print(f"Target energy: {user_prefs['target_energy']:.2f}")
+        print(f"Likes acoustic: {user_prefs['likes_acoustic']}")
+        print()
 
-    print("\nTop recommendations:\n")
-    for song, score, explanation in recommendations:
-        print(
-            f"- {song['title']} by {song['artist']} | "
-            f"Score: {score:.2f} | Why: {explanation}"
-        )
+        recommendations = recommend_songs(user_prefs, songs, k=5)
+        print("Top recommendations:\n")
+        for song, score, explanation in recommendations:
+            print(
+                f"- {song['title']} by {song['artist']} | "
+                f"Score: {score:.2f} | Why: {explanation}"
+            )
+        print("-" * 40)
+
+    show_profile_results(profile_one)
+    show_profile_results(profile_two)
+    show_profile_results(profile_three)
 
 
 if __name__ == "__main__":
